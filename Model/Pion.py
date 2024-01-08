@@ -77,3 +77,18 @@ def getIdPion(pion: dict) -> int:
         raise TypeError("getIdPion : Le paramètre n’est pas un pion")
 
     return pion[const.ID]
+
+def setIdPion(pion: dict, id: int) -> None:
+    """
+    Fonction permettant de changer la couleur du pion
+    :param pion: pion dont il faut changer la couleur
+    :param id: nouvel id du pion
+    :return: None
+    """
+    if type(pion) != dict:
+        raise TypeError("setIdPion : Le premier paramètre n’est pas un pion")
+    if type(id) != int:
+        raise TypeError("setIdPion : Le second paramètre n’est pas un entier.")
+
+    pion[const.ID] = id
+    return None

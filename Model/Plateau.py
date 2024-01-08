@@ -35,3 +35,16 @@ def type_plateau(plateau: list) -> bool:
     return True
 
 
+def construirePlateau() -> list:
+    """
+    Fonction qui créé un tableau de NB_LIGNES et NB_COLUMNS
+    :return: tableau
+    """
+    tableau = []
+    for i in range(const.NB_LINES):
+        ligne = []
+        for y in range(const.NB_COLUMNS):
+            ligne.append(None)
+        tableau.append(ligne)
+    return tableau
+

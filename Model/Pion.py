@@ -92,3 +92,4 @@ def setIdPion(pion: dict, id: int) -> None:
 
     pion[const.ID] = id
     return None
+

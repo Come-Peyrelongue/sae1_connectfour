@@ -26,3 +26,19 @@ def type_pion(pion: dict) -> bool:
         and (pion[const.ID] is None or type(pion[const.ID]) == int)
 
 
+def construirePion(couleur: int) -> dict:
+    """
+    Fonction permettant de construire un pion
+    :param color: Couleur du pion à construire
+    :return: Dictionnaire représentant un pion
+    """
+    pion = {const.COULEUR : couleur, const.ID : None}
+    return pion
+
+def getCouleurPion(pion: dict) -> int:
+    """
+    Fonction permettant de récupérer la couleur d'un pion
+    :param pion: pion dont il faut récupérer la couleur
+    :return: int de la couleur du pion
+    """
+    return pion[const.COULEUR]

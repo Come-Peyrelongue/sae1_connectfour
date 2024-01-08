@@ -71,3 +71,4 @@ def placerPionPlateau(plateau: list, pion: dict, numColumn: int):
     plateau[positionPion][numColumn] = pion
 
     return positionPion
+

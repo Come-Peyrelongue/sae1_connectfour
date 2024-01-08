@@ -48,3 +48,26 @@ def construirePlateau() -> list:
         tableau.append(ligne)
     return tableau
 
+def placerPionPlateau(plateau: list, pion: dict, numColumn: int):
+    """
+    Fonction qui place le pion dans la colonne choisie, en fonction des éléments placés en dessous.
+    :param plateau: plateau de jeu
+    :param pion: pion que l'on veut placer
+    :param numColumn: numéro de la colonne où l'on veux placer notre pion
+    :return: on return la position du pion, ou -1 si la colonne est complète
+    """
+    if type(plateau) != list:
+        raise TypeError("placerPionPlateau : Le premier paramètre ne correspond pas à un plateau")
+    if type(pion) != dict:
+        raise TypeError("placerPionPlateau : Le second paramètre n’est pas un pion")
+    if type(numColumn) != int:
+        raise TypeError("placerPionPlateau : Le troisième paramètre n’est pas un entier")
+    if numColumn > const.NB_COLUMNS:
+        raise ValueError("placerPionPlateau : La valeur de la colonne (numColumn) n’est pas correcte")
+
+    positionPion = const.NB_LINES - 1
+    while positionPion > -1 and plateau[positionPion][numColumn] is not None:
+        positionPion -= 1
+    plateau[positionPion][numColumn] = pion
+
+    return positionPion

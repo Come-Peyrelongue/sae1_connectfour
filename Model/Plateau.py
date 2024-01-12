@@ -63,7 +63,7 @@ def placerPionPlateau(plateau: list, pion: dict, numColumn: int):
     if type(numColumn) != int:
         raise TypeError("placerPionPlateau : Le troisième paramètre n’est pas un entier")
     if numColumn > const.NB_COLUMNS:
-        raise ValueError("placerPionPlateau : La valeur de la colonne (numColumn) n’est pas correcte")
+        raise ValueError(f"placerPionPlateau : La valeur de la colonne ({num}) n’est pas correcte")
 
     positionPion = const.NB_LINES - 1
     while positionPion > -1 and plateau[positionPion][numColumn] is not None:
@@ -72,3 +72,34 @@ def placerPionPlateau(plateau: list, pion: dict, numColumn: int):
 
     return positionPion
 
+def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Fonction qui permet de détecter les lignes de 4 pions de la couleur donnée
+    :param plateau: plateau à analyser
+    :param couleur: couleur donnée à détecter sur le plateau
+    :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
+    """
+    if not type_plateau(plateau) :
+        raise TypeError("detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau")
+    elif type(couleur) is not int:
+        raise TypeError("detecter4horizontalPlateau : Le second paramètre n’est pas un entier")
+    elif couleur not in const.COULEURS:
+        raise ValueError(f"détecter4horizontalPlateau : La valeur de la couleur ({couleur}) n’est pas correcte")
+
+    listesSeries = []
+
+    for ligne in plateau:
+        compteur = 0
+        liste = []
+
+        for hole in ligne:
+            if hole is not None and getCouleurPion(hole) == couleur:
+                compteur += 1
+                liste.append(hole)
+            else:
+                compteur = 0
+                liste = []
+
+            if compteur == 4:
+                listesSeries.append(list(liste[:4]))
+    return listesSeries

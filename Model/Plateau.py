@@ -159,7 +159,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
 
 def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
     """
-    Fonction qui permet de détecter les diagonales de 4 pions de la couleur donnée
+    Fonction qui permet de détecter les diagonales directes de 4 pions de la couleur donnée
     :param plateau: plateau à analyser
     :param couleur: couleur donnée à détecter sur le plateau
     :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
@@ -185,7 +185,38 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                 else:
                     compteur = 0
                     liste = []
-
                 if compteur == 4:
                     listesSeries.append(list(liste[:4]))
     return listesSeries
+
+def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
+    """
+    Fonction qui permet de détecter les diagonales indirectes de 4 pions de la couleur donnée
+    :param plateau: plateau à analyser
+    :param couleur: couleur donnée à détecter sur le plateau
+    :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
+    """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4diagonaleIndirectePlateau : Le premier paramètre ne correspond pas à un plateau")
+    elif type(couleur) != int:
+        raise TypeError("detecter4diagonaleIndirectePlateau : Le second paramètre n’est pas un entier")
+    elif couleur not in const.COULEURS:
+        raise ValueError(f"detecter4diagonaleIndirectePlateau : La valeur de la couleur ({couleur}) n’est pas correcte")
+
+    listeSeries = []
+
+    for ligne in range(const.NB_LINES - 3):
+        for colonne in range(3, const.NB_COLUMNS):
+            compteur = 0
+            liste = []
+            for i in range(4):
+                pion = plateau[ligne + i][colonne - i]
+                if pion is not None and getCouleurPion(pion) == couleur:
+                    compteur += 1
+                    liste.append(pion)
+                else:
+                    compteur = 0
+                    liste = []
+                if compteur == 4:
+                    listeSeries.append(list(liste[:4]))
+    return listeSeries

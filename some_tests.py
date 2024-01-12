@@ -13,3 +13,6 @@ print("\x1B[41m \x1B[0m : carré rouge ")
 print("\x1B[41mA\x1B[0m : A sur fond rouge")
 
 print(toStringPlateau(p))
+
+serie = detecter4diagonaleIndirectePlateau(p, const.ROUGE)
+print(serie)

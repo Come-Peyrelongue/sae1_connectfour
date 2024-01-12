@@ -102,7 +102,7 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     :param couleur: couleur donnée à détecter sur le plateau
     :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
     """
-    if not type_plateau(plateau) :
+    if not type_plateau(plateau):
         raise TypeError("detecter4horizontalPlateau : Le premier paramètre ne correspond pas à un plateau")
     elif type(couleur) is not int:
         raise TypeError("detecter4horizontalPlateau : Le second paramètre n’est pas un entier")
@@ -132,7 +132,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
     :param couleur: couleur donnée à détecter sur le plateau
     :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
     """
-    if not type_plateau(plateau) :
+    if not type_plateau(plateau):
         raise TypeError("detecter4verticalPlateau : Le premier paramètre ne correspond pas à un plateau")
     elif type(couleur) != int:
         raise TypeError("detecter4verticalPlateau : Le second paramètre n’est pas un entier")
@@ -155,4 +155,37 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
             if compteur == 4:
                 listesSeries.append(list(liste[:4]))
 
+    return listesSeries
+
+def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
+    """
+    Fonction qui permet de détecter les diagonales de 4 pions de la couleur donnée
+    :param plateau: plateau à analyser
+    :param couleur: couleur donnée à détecter sur le plateau
+    :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
+    """
+    if not type_plateau(plateau):
+        raise TypeError("detecter4diagonaleDirectePlateau : Le premier paramètre ne correspond pas à un plateau")
+    elif type(couleur) != int:
+        raise TypeError("detecter4diagonaleDirectePlateau : Le second paramètre n’est pas un entier")
+    elif couleur not in const.COULEURS:
+        raise ValueError(f"detecter4diagonaleDirectePlateau : La valeur de la couleur ({couleur}) n’est pas correcte")
+
+    listesSeries = []
+
+    for ligne in range(const.NB_LINES - 3):
+        for colonne in range(const.NB_COLUMNS - 3):
+            compteur = 0
+            liste = []
+            for i in range(4):
+                pion = plateau[ligne + i][colonne + i]
+                if pion is not None and getCouleurPion(pion) == couleur:
+                    compteur += 1
+                    liste.append(pion)
+                else:
+                    compteur = 0
+                    liste = []
+
+                if compteur == 4:
+                    listesSeries.append(list(liste[:4]))
     return listesSeries

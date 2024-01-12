@@ -72,6 +72,29 @@ def placerPionPlateau(plateau: list, pion: dict, numColumn: int):
 
     return positionPion
 
+def toStringPlateau(plateau: list) -> str:
+    """
+    Fonction retournant le plateau en chaine de charactère avec couleur
+    :param plateau: plateau
+    :return: le plateau en chaine de charatère
+    """
+    tableau = ""
+    for ligne in plateau:
+        for case in ligne:
+            tableau += "|"
+            if case is None:
+                tableau += " "
+            else:
+                couleur = getCouleurPion(case)
+                if couleur == const.JAUNE:
+                    tableau += "\x1B[43m \x1B[0m"
+                elif couleur == const.ROUGE:
+                    tableau += "\x1B[41m \x1B[0m"
+        tableau += "|\n"
+    tableau += "-" * 15 + "\n"
+    tableau += "1 2 3 4 5 6"
+    return tableau
+
 def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     """
     Fonction qui permet de détecter les lignes de 4 pions de la couleur donnée
@@ -91,7 +114,6 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
     for ligne in plateau:
         compteur = 0
         liste = []
-
         for hole in ligne:
             if hole is not None and getCouleurPion(hole) == couleur:
                 compteur += 1
@@ -99,7 +121,38 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
             else:
                 compteur = 0
                 liste = []
-
             if compteur == 4:
                 listesSeries.append(list(liste[:4]))
+    return listesSeries
+
+def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
+    """
+    Fonction qui permet de détecter les colonnes de 4 pions de la couleur donnée
+    :param plateau: plateau à analyser
+    :param couleur: couleur donnée à détecter sur le plateau
+    :return: on return une liste de séries ou une liste vide s'il n'y a aucune série
+    """
+    if not type_plateau(plateau) :
+        raise TypeError("detecter4verticalPlateau : Le premier paramètre ne correspond pas à un plateau")
+    elif type(couleur) != int:
+        raise TypeError("detecter4verticalPlateau : Le second paramètre n’est pas un entier")
+    elif couleur not in const.COULEURS:
+        raise ValueError(f"detecter4verticalPlateau : La valeur de la couleur ({couleur}) n’est pas correcte")
+
+    listesSeries = []
+
+    for colonne in range(const.NB_COLUMNS):
+        compteur = 0
+        liste = []
+        for ligne in range(const.NB_LINES):
+            pion = plateau[ligne][colonne]
+            if pion is not None and getCouleurPion(pion) == couleur:
+                compteur += 1
+                liste.append(pion)
+            else:
+                compteur = 0
+                liste = []
+            if compteur == 4:
+                listesSeries.append(list(liste[:4]))
+
     return listesSeries

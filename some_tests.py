@@ -11,3 +11,5 @@ print(p)
 print("\x1B[43m \x1B[0m : carré jaune ")
 print("\x1B[41m \x1B[0m : carré rouge ")
 print("\x1B[41mA\x1B[0m : A sur fond rouge")
+
+print(toStringPlateau(p))

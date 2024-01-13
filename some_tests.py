@@ -19,3 +19,4 @@ print(toStringPlateau(p))
 
 print(getPionsGagnantsPlateau(p))
 print(isRempliPlateau(p))
+print(construireJoueur(1))

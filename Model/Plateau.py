@@ -261,3 +261,16 @@ def  isRempliPlateau(plateau: list) -> bool:
             if compteur > 0:
                 res=False
     return res
+
+def construireJoueur(couleur: int) -> dict:
+    """
+    Fonction qui permet de construire un joueur à partir d'une couleur
+    :param couleur: int de la couleur attribuée au joueur
+    :return: dict du joueur
+    """
+    if not type(couleur)==int:
+        raise TypeError("construireJoueur : Le paramètre n’est pas un entier")
+    if couleur not in const.COULEURS:
+        raise ValueError(f"construirePion : la couleur ({couleur}) n’est pas correcte")
+    joueur = {"Couleur": couleur, "Plateau": None, "Fonction": None}
+    return joueur

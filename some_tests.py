@@ -1,5 +1,6 @@
 from Model.Constantes import *
 from Model.Plateau import *
+from Model.Joueur import *
 from Model.Pion import *
 from random import randint, choice
 p = construirePlateau()
@@ -17,6 +18,10 @@ for _ in range(20):
     placerPionPlateau(p, construirePion(choice(const.COULEURS)), randint(0, const.NB_COLUMNS - 1))
 print(toStringPlateau(p))
 
-print(getPionsGagnantsPlateau(p))
-print(isRempliPlateau(p))
-print(construireJoueur(1))
+print("Pions gagnants : ",getPionsGagnantsPlateau(p))
+print("Plateau rempli : ",isRempliPlateau(p))
+joueur = construireJoueur(1)
+print("Joueur : ",joueur)
+print("Couleur du joueur : ",getCouleurJoueur(joueur))
+print("Plateau du joueur : ",getPlateauJoueur(joueur))
+print("Fonction du joueur : ",getPlacerPionJoueur(joueur))

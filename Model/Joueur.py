@@ -18,7 +18,6 @@ from Model.Plateau import *
 def type_joueur(joueur: dict) -> bool:
     """
     Détermine si le paramètre peut correspondre à un joueur.
-
     :param joueur: Paramètre à tester
     :return: True s'il peut correspondre à un joueur, False sinon.
     """
@@ -34,4 +33,35 @@ def type_joueur(joueur: dict) -> bool:
         return False
     return True
 
+def getCouleurJoueur(joueur: dict) -> int:
+    """
+    Fonction qui retourne la couleur d'un joueur passé en paramètre
+    :param joueur: dict du joueur
+    :return: couleur du joueur
+    """
+    if not type(joueur)==dict:
+        raise TypeError("getCouleurJoueur : Le paramètre ne correspond pas à un joueur")
+    couleur = joueur["Couleur"]
+    return couleur
 
+def getPlateauJoueur(joueur: dict) -> list:
+    """
+    Fonction qui retourne le plateau d'un joueur passé en paramètre
+    :param joueur: dict du joueur
+    :return: plateau du joueur
+    """
+    if not type(joueur) == dict:
+        raise TypeError("getPlateauJoueur : Le paramètre ne correspond pas à un joueur")
+    plateau = joueur["Plateau"]
+    return plateau
+
+def getPlacerPionJoueur(joueur: dict):
+    """
+    Fonction qui retourne le plateau d'un joueur passé en paramètre
+    :param joueur: dict du joueur
+    :return: plateau du joueur
+    """
+    if not type(joueur) == dict:
+        raise TypeError("getPlacerPionJoueur : Le paramètre ne correspond pas à un joueur")
+    fonction = joueur["Fonction"]
+    return fonction

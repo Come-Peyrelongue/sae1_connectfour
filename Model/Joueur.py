@@ -65,3 +65,10 @@ def getPlacerPionJoueur(joueur: dict):
         raise TypeError("getPlacerPionJoueur : Le paramètre ne correspond pas à un joueur")
     fonction = joueur["Fonction"]
     return fonction
+
+def getPionJoueur(joueur: dict) -> dict:
+    if not type(joueur) == dict:
+        raise TypeError("getPionJoueur : Le paramètre ne correspond pas à un joueur")
+    couleur = joueur["Couleur"]
+    pion = {const.COULEUR: couleur, const.ID: None}
+    return pion

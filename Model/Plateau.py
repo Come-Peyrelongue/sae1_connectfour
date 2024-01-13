@@ -220,3 +220,32 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                 if compteur == 4:
                     listeSeries.append(list(liste[:4]))
     return listeSeries
+
+def getPionsGagnantsPlateau(plateau: list) -> list:
+    """
+    Fonction qui permet de récupérer une liste des séries gagnantes du plateau.
+    :param plateau: plateau
+    :return: liste remplie si il y a des séries gagnantes ou liste vide sinon
+    """
+    if not type_plateau(plateau):
+        raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau")
+    horizontal1 = detecter4horizontalPlateau(plateau,1)
+    vertical1 = detecter4verticalPlateau(plateau,1)
+    diagDirecte1 = detecter4diagonaleDirectePlateau(plateau,1)
+    diagIndirecte1 = detecter4diagonaleIndirectePlateau(plateau,1)
+    horizontal0 = detecter4horizontalPlateau(plateau, 0)
+    vertical0 = detecter4verticalPlateau(plateau, 0)
+    diagDirecte0 = detecter4diagonaleDirectePlateau(plateau, 0)
+    diagIndirecte0 = detecter4diagonaleIndirectePlateau(plateau, 0)
+
+    liste = [horizontal1, vertical1, diagDirecte1, diagIndirecte1, horizontal0, vertical0, diagDirecte0, diagIndirecte0]
+    return liste
+
+def  isRempliPlateau(plateau: list) -> bool:
+    """
+    Fonction qui défini si un plateau est rempli ou non
+    :param plateau:
+    :return: true si plateau rempli ou false si plateau non rempli
+    """
+    if not type_plateau(plateau):
+        raise TypeError("isRempliPlateau : Le paramètre n’est pas un plateau")

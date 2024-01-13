@@ -249,3 +249,15 @@ def  isRempliPlateau(plateau: list) -> bool:
     """
     if not type_plateau(plateau):
         raise TypeError("isRempliPlateau : Le paramètre n’est pas un plateau")
+    res=True
+    for colonne in range(const.NB_COLUMNS):
+        compteur = 0
+        for ligne in range(const.NB_LINES):
+            pion = plateau[ligne][colonne]
+            if pion is not None:
+                compteur += 1
+            else:
+                compteur = 0
+            if compteur > 0:
+                res=False
+    return res

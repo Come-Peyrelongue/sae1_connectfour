@@ -1,6 +1,7 @@
 from Model.Constantes import *
 from Model.Pion import *
 from Model.Plateau import *
+from random import *
 
 
 
@@ -99,4 +100,23 @@ def setPlacerPionJoueur(joueur: dict, affecter: callable) -> None:
     if not callable(affecter) == True:
         raise TypeError("setPlacerPionJoueur : Le paramètre ne correspond pas à une fonction")
     joueur[const.PLACER_PION] = affecter
+    return None
+
+def _placerPionJoueur(joueur: dict) -> int:
+    """
+    Fonction qui tire un numéro de colonne à jouer au hasard
+    :param joueur: joueur qui va jouer dans la colonne
+    :return: num de la colonne
+    """
+    if not type(joueur) == dict:
+        raise TypeError("initialiserIAJoueur : Le premier paramètre n’est pas un joueurr")
+    nombre = randint(0, (const.NB_COLUMNS-1))
+    return nombre
+
+def initialiserIAJoueur(joueur: dict, rang: bool) -> None:
+    if not type(joueur) == dict:
+        raise TypeError("initialiserIAJoueur : Le premier paramètre n’est pas un joueurr")
+    if not type(rang) == bool:
+        raise TypeError("initialiserIAJoueur : Le second paramètre n’est pas un booléen")
+    setPlacerPionJoueur(joueur,  _placerPionJoueur(joueur))
     return None

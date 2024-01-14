@@ -122,7 +122,7 @@ def detecter4horizontalPlateau(plateau: list, couleur: int) -> list:
                 compteur = 0
                 liste = []
             if compteur == 4:
-                listesSeries.append(list(liste[:4]))
+                listesSeries = list(liste[:4])
     return listesSeries
 
 def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
@@ -153,7 +153,7 @@ def detecter4verticalPlateau(plateau: list, couleur: int) -> list:
                 compteur = 0
                 liste = []
             if compteur == 4:
-                listesSeries.append(list(liste[:4]))
+                listesSeries = list(liste[:4])
 
     return listesSeries
 
@@ -186,7 +186,7 @@ def detecter4diagonaleDirectePlateau(plateau: list, couleur: int) -> list:
                     compteur = 0
                     liste = []
                 if compteur == 4:
-                    listesSeries.append(list(liste[:4]))
+                    listesSeries = list(liste[:4])
     return listesSeries
 
 def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
@@ -218,7 +218,7 @@ def detecter4diagonaleIndirectePlateau(plateau: list, couleur: int) -> list:
                     compteur = 0
                     liste = []
                 if compteur == 4:
-                    listeSeries.append(list(liste[:4]))
+                    listeSeries = list(liste[:4])
     return listeSeries
 
 def getPionsGagnantsPlateau(plateau: list) -> list:
@@ -229,16 +229,25 @@ def getPionsGagnantsPlateau(plateau: list) -> list:
     """
     if not type_plateau(plateau):
         raise TypeError("getPionsGagnantsPlateau : Le paramètre n’est pas un plateau")
-    horizontal1 = detecter4horizontalPlateau(plateau,1)
+
+    """horizontal1 = detecter4horizontalPlateau(plateau,1)
     vertical1 = detecter4verticalPlateau(plateau,1)
     diagDirecte1 = detecter4diagonaleDirectePlateau(plateau,1)
     diagIndirecte1 = detecter4diagonaleIndirectePlateau(plateau,1)
     horizontal0 = detecter4horizontalPlateau(plateau, 0)
     vertical0 = detecter4verticalPlateau(plateau, 0)
     diagDirecte0 = detecter4diagonaleDirectePlateau(plateau, 0)
-    diagIndirecte0 = detecter4diagonaleIndirectePlateau(plateau, 0)
+    diagIndirecte0 = detecter4diagonaleIndirectePlateau(plateau, 0)"""
 
-    liste = [horizontal1, vertical1, diagDirecte1, diagIndirecte1, horizontal0, vertical0, diagDirecte0, diagIndirecte0]
+    liste = []
+    liste += detecter4horizontalPlateau(plateau,1)
+    liste += detecter4verticalPlateau(plateau,1)
+    liste += detecter4diagonaleDirectePlateau(plateau,1)
+    liste += detecter4diagonaleIndirectePlateau(plateau,1)
+    liste += detecter4horizontalPlateau(plateau, 0)
+    liste += detecter4verticalPlateau(plateau, 0)
+    liste += detecter4diagonaleDirectePlateau(plateau, 0)
+    liste += detecter4diagonaleIndirectePlateau(plateau, 0)
     return liste
 
 def  isRempliPlateau(plateau: list) -> bool:

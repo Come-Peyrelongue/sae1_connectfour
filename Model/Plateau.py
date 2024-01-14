@@ -328,3 +328,4 @@ def placerPionLignePlateau(plateau: list, pion: dict, ligne: int, left: bool) ->
 
     res = (pions_pousse, tombe)
     return res
+

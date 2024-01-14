@@ -120,3 +120,15 @@ def initialiserIAJoueur(joueur: dict, rang: bool) -> None:
         raise TypeError("initialiserIAJoueur : Le second paramètre n’est pas un booléen")
     setPlacerPionJoueur(joueur,  _placerPionJoueur(joueur))
     return None
+
+def setModeEtenduJoueur(joueur: dict, oui: bool) -> None:
+    if oui == True:
+        destFichier= r"../Constantes.py"
+        with open(destFichier, "a") as f:
+            f.write("const.MODE_ETENDU = \"ModeEtendu\"")
+    else:
+        with open("Constantes.py", "r+") as fp:
+            lines = fp.readlines()
+            fp.seek(0)
+            fp.truncate()
+            fp.writelines(lines[:1])

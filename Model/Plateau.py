@@ -283,3 +283,48 @@ def construireJoueur(couleur: int) -> dict:
         raise ValueError(f"construirePion : la couleur ({couleur}) n’est pas correcte")
     joueur = {"Couleur": couleur, "Plateau": None, "Fonction": None}
     return joueur
+
+def placerPionLignePlateau(plateau: list, pion: dict, ligne: int, left: bool) -> tuple:
+    """
+    Fonction qui permet de placer un pion dans un lign et non une colonne
+    :param plateau: plateau du jeu
+    :param pion: pion a pousser
+    :param ligne: numéro de la ligne dans laquelle mettre le pion
+    :param left: mettre le pion depuis la droite ou la gauche
+    :return: truple des pions ayant été poussé
+    """
+    if not type_plateau(plateau):
+        raise TypeError("placerPionLignePlateau : Le premier paramètre n’est pas un plateau")
+    if not type_pion(pion):
+        raise TypeError("placerPionLignePlateau : Le second paramètre n’est pas un pion")
+    if type(ligne) != int:
+        raise TypeError("placerPionLignePlateau : le troisième paramètre n’est pas un entier")
+    if ligne < 0 and ligne >= const.NB_LINES:
+        raise ValueError("placerPionLignePlateau : Le troisième paramètre (valeur_du_paramètre) ne désigne pas une "
+                         "ligne")
+    if type(left) != bool:
+        raise TypeError("« placerPionLignePlateau : le quatrième paramètre n’est pas un booléen")
+
+    pions_pousse = [pion]
+    tombe = None
+
+    if left:
+        colonne = 0
+        while colonne < const.NB_COLUMNS and plateau[ligne][colonne] is not None:
+            pions_pousse.append(plateau[ligne][colonne])
+            colonne += 1
+    else:
+        colonne = const.NB_COLUMNS - 1
+        while colonne > -1 and plateau[ligne][colonne] is not None :
+            pions_pousse.append(plateau[ligne][colonne])
+            colonne -= 1
+
+    if colonne < const.NB_COLUMNS - 1:
+        tombe = const.NB_LINES
+        i = 0
+        while ligne + i < const.NB_LINES and plateau[ligne + i][colonne] is None:
+            tombe = ligne + i
+            i += 1
+
+    res = (pions_pousse, tombe)
+    return res

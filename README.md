@@ -1,5 +1,11 @@
 # Puissance 4
 
+## Auteur :
+
+Côme Peyrelongue
+
+## Description :
+
 Le jeu du Puissance 4 en Python/PyGame (pour la SAE 1 & 2)
 
 ## Préparer l'environnement Python
